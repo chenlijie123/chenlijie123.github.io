@@ -1,5 +1,5 @@
 ### css 笔记
-- [css 指南](css/css)
+- [css 指南](CSS/css)
 
 
 ### js 笔记
@@ -9,5 +9,5 @@
 
 ### git 笔记
 
-- [git 指南](css/git.md)
+- [git 指南](CSS/git.md)
 

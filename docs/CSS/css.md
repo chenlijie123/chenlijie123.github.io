@@ -22,8 +22,8 @@
 
 属性选择符
 
-| 序号 | 选择器       | 含义                                                                             |
-| ---- | :----------- | -------------------------------------------------------------------------------- |
+| 序号 | 选择器       | 含义 |
+|------|-------------|------|
 | 9    | E[att]       | 匹配所有具有 att 属性的 E 元素 （E 可以省略 例如[att]）                          |
 | 10   | E[att=val]   | 匹配所有 att 属性等于 val 的 E 元素                                              |
 | 11   | E[att~=val]  | 匹配所有 att 属性具有多个空格分隔的值 其中一个为 val 的元素                      |
@@ -144,7 +144,7 @@ CSS3 中的:target 伪类
   border: 40rpx solid rgba(0, 0, 0, .1);
 ```
 
-![边框透明时背景色渗透](images/background-border.png)<br/>
+<!-- ![边框透明时背景色渗透](images/background-border.png)<br/> -->
 当边框有透明度时，背景颜色会渗透到边框下
 
 > 解决方法 background-clip : content-box | padding-box
@@ -155,7 +155,7 @@ CSS3 中的:target 伪类
 
 ## 弹性盒 display: flex;
 
-![弹性盒图片示例](images/flex.png)
+<!-- ![弹性盒图片示例](images/flex.png) -->
 
 #### 容器的属性
 

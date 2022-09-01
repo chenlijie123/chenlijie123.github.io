@@ -1,8 +1,9 @@
-### CSS
+<!-- docs/_sidebar.md -->
 
-- [css 基础知识](./CSS/css.md)
-- [git 指南](./CSS/git.md)
+### CSS
+  - [css 基础知识](CSS/css)
+  - [git 指南](CSS/git)
+
 
 ### JS
-
-- [基础类型](./JS/data-type.md)
+  - [基础类型](JS/data-type)

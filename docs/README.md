@@ -1,5 +1,5 @@
 ### css 笔记
-- [css 指南](css/display)
+- [css 指南](css/css)
 
 
 ### js 笔记

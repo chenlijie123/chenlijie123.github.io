@@ -144,7 +144,7 @@ CSS3 中的:target 伪类
   border: 40rpx solid rgba(0, 0, 0, .1);
 ```
 
-![边框透明时背景色渗透](images/back-border.png)<br/>
+![边框透明时背景色渗透](_images/back-border.png)<br/>
 当边框有透明度时，背景颜色会渗透到边框下
 
 > 解决方法 background-clip : content-box | padding-box
@@ -170,7 +170,7 @@ background-position: calc(100% - 10px) calc(100hv - 10px);
 
 ## 弹性盒 display: flex;
 
-![弹性盒图片示例](images/flex.png)
+![弹性盒图片示例](_images/flex.png)
 
 #### 容器的属性
 

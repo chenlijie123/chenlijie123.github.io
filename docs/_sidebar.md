@@ -1,4 +1,3 @@
-- Getting started
 
-  - [Quick start](css.md)
-  - [Writing more pages](git.md)
+  - [css 基础](CSS/css.md)
+  - [git 指令](git)

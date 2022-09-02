@@ -13,14 +13,80 @@
     <div id="app"></div>
     <script>
       window.$docsify = {
-        name: '学习笔记',
-        // repo: '',
-        subMaxLevel: 2,
+        // 侧边栏支持，默认加载的是项目根目录下的_sidebar.md文件
         loadSidebar: true,
+        // 导航栏支持，默认加载的是项目根目录下的_navbar.md文件
+        loadNavbar: true,
+        // 最大支持渲染的标题层级
+        maxLevel: 4,
+        // 自定义侧边栏后默认不会再生成目录，设置生成目录的最大层级，建议配置为1或者2
+        subMaxLevel: 2,
+        // 外链表达式
+        externalLinkTarget: '_blank',
+
+        auto2top: true,
+        search: {
+            maxAge: 86400000,
+            paths: 'auto',
+            placeholder: {
+                '/': '搜索'
+            },
+            noData: {
+                '/': '找不到结果'
+            },
+            depth: 4,
+        },
+        'flexible-alerts': {
+            style: 'flat'
+        },
+        formatUpdated: '{YYYY}/{MM}/{DD} {HH}:{mm}:{ss}',
+        // autoHeader: true,
+        // relativePath: true,
+        coverpage: true,
+        homepage: 'README.md',
+        disqus: 'shortname',
         alias: {
-            // '/.*/_navbar.md': '/_navbar.md',
+            '/.*/_navbar.md': '/_navbar.md',
             '/.*/_sidebar.md': '/_sidebar.md',
         },
+        // logo: 'images/logo.png',
+        name: '笔记',
+        repo: '',
+ 
+        // executeScript: true,
+       
+        // mergeNavbar: true,
+        
+        // ga: 'UA-106147152-1',
+        // matomo: {
+        //   host: '//matomo.thunderwave.de',
+        //   id: 6,
+        // },
+        // nameLink: {
+        //   '/es/': '#/es/',
+        //   '/de-de/': '#/de-de/',
+        //   '/ru-ru/': '#/ru-ru/',
+        //   '/zh-cn/': '#/zh-cn/',
+        //   '/': '#/',
+        // },
+        // search: {
+        //   noData: {
+        //     '/es/': '¡No hay resultados!',
+        //     '/de-de/': 'Keine Ergebnisse!',
+        //     '/ru-ru/': 'Никаких результатов!',
+        //     '/zh-cn/': '没有结果!',
+        //     '/': 'No results!',
+        //   },
+        //   paths: 'auto',
+        //   placeholder: {
+        //     '/es/': 'Buscar',
+        //     '/de-de/': 'Suche',
+        //     '/ru-ru/': 'Поиск',
+        //     '/zh-cn/': '搜索',
+        //     '/': 'Search',
+        //   },
+        //   pathNamespaces: ['/es', '/de-de', '/ru-ru', '/zh-cn'],
+        // },
       }
     </script>
     <!-- Docsify v4 -->

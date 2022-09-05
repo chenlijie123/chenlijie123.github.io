@@ -147,20 +147,16 @@ CSS3 中的:target 伪类
 ![边框透明时背景色渗透](_images/back-border.png)<br/>
 当边框有透明度时，背景颜色会渗透到边框下
 
-> 解决方法 background-clip : content-box | padding-box
+> 解决方法 - [background-clip] : content-box | padding-box
 
 #### 背景图偏移
 
-背景图偏移 根据 background-origin 决定 默认padding-box
+背景图偏移 根据 `background-origin` 决定 默认padding-box
+
 ```
 background-origin:padding-box | content-box | border-box
-background-position: center | left top | left 20px top | left 20px top 20px 
-
-background-position: calc(100% - 10px) calc(100hv - 10px);
-
+background-position: center | left top | calc(100% - 10px) calc(100hv - 10px) | left 20px top | left 20px top 20px 
 ```
-
-
 
 
 

@@ -3,9 +3,9 @@
 #### 基础提交指令
 
 ```
-  git status 查看当前状态
-
   git pull  同步远程分支合到本地
+
+  git status 查看当前状态
 
   git add . / 文件名  添加修改到暂存区
 
@@ -18,21 +18,29 @@
 #### 分支
 
 ```
+  git clone 地址 // 克隆项目
+
+  git branch 查看本地分支
+
+  git branch -a 查看远程分支
+
   git branch 分支名  // 新建
 
   git checkout 分支名  // 切换
+
+  git branch -b 分支名 // 创建并切换分支
 
   git branch -d 分支名 // 删除本地分支
 
   git push origin --delete 远程分支名  //删除远程分支
 
-
 ```
 
-#### 更新远程主机 origin
+#### 远程分支更新到本地
 
 ```
   git remote update origin --prune
+
 ```
 
 #### 合并

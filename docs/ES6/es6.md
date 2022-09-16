@@ -128,4 +128,21 @@ move(); // [0, 0]
 
 #### 模板字符串 ``
 
-#### 
+ `${变量}`  `空格 保留  ` 
+
+#### 新方法
+> indexOf 查找新方法
+```
+let s = 'hello world'
+includes('查找项',开始位置)  
+startsWith('查找项'，开始位)
+endsWith('查找项'，前n个字符)
+```
+> repeat方法返回一个新字符串，表示将原字符串重复n次。padStart() padEnd() 补全
+```
+'x'.repeat(3) // 'xxx'
+'x'.padStart(5,'ab') // ababx
+'x'.padEnd(5,'ab') // xabab
+ ```
+> at() 返回索引位对应的字符
+

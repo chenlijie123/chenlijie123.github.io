@@ -4,24 +4,44 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>测试</title>
+  <title>解析</title>
 </head>
 <body>
-  <div class="box"></div>
+  <div class="box">
+    测试数据
+    <img class="images" src="./docs/CSS/_images/flex.png" alt="">
+    asxcvgfp
+    <span class="inline">12测试数据</span>
+  </div>
+  
 </body>
 <script>
     
 </script>
 <style>
-    .box{ 
-      width: 100px;
-      height: 100px;
-      border: 5px solid #CCC;
-      background: url("docs/CSS/_images/warning.svg") no-repeat;
-      background-position: 100% 100%;
-      border-radius: 8px;
-      /* outline: 5px; */
-
-    }
+  html,body {
+    padding: 0;
+    margin: 0;
+  }
+ .box {
+  width:375px;
+  /* background-color: blueviolet; */
+  /* background-clip: content-box; */
+  /* padding: 20px; */
+  border: 0.5px solid red;
+  box-sizing: border-box;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+ }
+ .images {
+  width: 20px;
+  height: 20px;
+  /* vertical-align: middle; */
+ }
+ .inline {
+  /* vertical-align: middle; */
+ }
+ 
 </style>
 </html>

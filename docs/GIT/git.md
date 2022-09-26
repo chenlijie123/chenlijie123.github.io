@@ -38,6 +38,7 @@
 
 #### 远程分支更新到本地
 
+
 ```
   git remote update origin --prune
 
@@ -71,3 +72,50 @@ git reflog  //  复制要恢复操作前的hash值
 git reset --head hash 
 
 ```
+
+
+#### 远程分支与本地
+
+`git fetch`与 `git remote update origin --prune`区别
+
+- git fetch 拉取分支，远程被删去的分支不会同步删除本地的origin/xxx分支
+
+      例如本地有dev分支、有origin/dev，现在远程新加test分支，删除了dev分支，git fetch后  
+      本地新增origin/test(并不会有test分支，需要checkout test)，但不会删除本地的origin/dev
+- git remote update origin --prune
+
+      与上面相同情况下，执行命令后本地新增origin/test分支(没有test需checkout)，且会删除掉本地  
+      的origin/dev分支，但不会删除本地的test分支
+
+`git fetch`与`git pull`区别
+
+      git pull包含git fetch与git merge，例如test分支，git pull之后，会把本地的origin/test同步  
+      到最新，然后merge到本地的test分支，类似于git merge origin/test
+
+#### 同步远程分支和本地分支
+
+- 本地有新分支dev远程没有
+
+      直接推送到远程
+      git checkout -b dev 新建dev，类似 git branch dev和git checkout dev缩写
+      git push -u origin dev 推送到远程仓库
+      git branch -a 查看远程分支是否有dev
+
+- 远程有dev 本地没有
+
+      远程仓库同步本地
+      git fetch 将远程主句的更新全部取回本地  
+      git branch -a 查看远程分支  
+      git branch 查看本地分支  
+      git checkout -b dev 创建并切换到本地dev
+
+- 本地删除了dev 远程仓库也想删除dev
+
+      git branch -d 分支名 删除本地分支  
+      git push origin -d 分支名 删除远程分支  
+
+- 远程删除了分支，本地也想删除
+
+      git remote show origin 查看远程分支与本地分支对应关系  
+      git remote prune origin 删除远程已经删除过的分支  
+      

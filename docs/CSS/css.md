@@ -187,3 +187,19 @@ background-position: center | left top | calc(100% - 10px) calc(100hv - 10px) | 
 - flex 由 flex-grow flex-shrink flex-basis 缩写( 1 0 auto )后两个属性可选 auto(1 1 auto) none(0 0 auto)
 
 ---
+
+##  单位
+ 
+ > 绝对单位 px像素点
+
+ > 相对单位 em rem 基于窗口的大小来等比例缩放字号
+ - 1em 等于当前元素的字号，其准确值取决于作用的元素,当元素字号不存在时，用元素继承的字号参与计算
+  ```
+  box {
+    font-size: 16px;
+    padding: 1em; // 16px
+  }
+  // 计算想要的单位例如 20px
+  // 计算公式 20/ font-size: 16px = 1.25em
+
+```

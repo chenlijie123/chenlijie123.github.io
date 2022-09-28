@@ -7,13 +7,9 @@
   <title>解析</title>
 </head>
 <body>
-  <div class="box">
-    测试数据
-    <img class="images" src="./docs/CSS/_images/flex.png" alt="">
-    asxcvgfp
-    <span class="inline">12测试数据</span>
-  </div>
-  
+   <div class="parent">
+      <div class="child"></div>
+   </div>
 </body>
 <script>
     
@@ -23,25 +19,19 @@
     padding: 0;
     margin: 0;
   }
- .box {
-  width:375px;
-  /* background-color: blueviolet; */
-  /* background-clip: content-box; */
-  /* padding: 20px; */
-  border: 0.5px solid red;
-  box-sizing: border-box;
-  font-size: 12px;
-  display: flex;
-  align-items: center;
+  .parent {
+    width: 200px;
+    height: 200px;
+    margin: 50px;
+    padding: 30px;
+    background-color: blue;
+  }
+ .child{
+    width: 20px;
+    height: 20px;
+    margin: 50%;
+    padding: 50%;
+    background-color: red;
  }
- .images {
-  width: 20px;
-  height: 20px;
-  /* vertical-align: middle; */
- }
- .inline {
-  /* vertical-align: middle; */
- }
- 
 </style>
 </html>

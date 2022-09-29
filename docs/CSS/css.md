@@ -22,8 +22,8 @@
 
 属性选择符
 
-| 序号 | 选择器       | 含义 |
-|------|-------------|------|
+| 序号 | 选择器       | 含义                                                                             |
+| ---- | ------------ | -------------------------------------------------------------------------------- |
 | 9    | E[att]       | 匹配所有具有 att 属性的 E 元素 （E 可以省略 例如[att]）                          |
 | 10   | E[att=val]   | 匹配所有 att 属性等于 val 的 E 元素                                              |
 | 11   | E[att~=val]  | 匹配所有 att 属性具有多个空格分隔的值 其中一个为 val 的元素                      |
@@ -151,16 +151,12 @@ CSS3 中的:target 伪类
 
 #### 背景图偏移
 
-背景图偏移 根据 `background-origin` 决定 默认padding-box
+背景图偏移 根据 `background-origin` 决定 默认 padding-box
 
 ```
 background-origin:padding-box | content-box | border-box
-background-position: center | left top | calc(100% - 10px) calc(100hv - 10px) | left 20px top | left 20px top 20px 
+background-position: center | left top | calc(100% - 10px) calc(100hv - 10px) | left 20px top | left 20px top 20px
 ```
-
-
-
-
 
 ---
 
@@ -188,18 +184,93 @@ background-position: center | left top | calc(100% - 10px) calc(100hv - 10px) | 
 
 ---
 
-##  单位
- 
- > 绝对单位 px像素点
+## 单位
 
- > 相对单位 em rem 基于窗口的大小来等比例缩放字号
- - 1em 等于当前元素的字号，其准确值取决于作用的元素,当元素字号不存在时，用元素继承的字号参与计算
-  ```
-  box {
-    font-size: 16px;
-    padding: 1em; // 16px
+> 绝对单位 px 像素点
+
+> 相对单位 em rem 基于窗口的大小来等比例缩放字号
+
+- 1em 等于当前元素的字号，其准确值取决于作用的元素,当元素字号不存在时，用元素继承的字号参与计算
+- 1rem 等于根元素 html 字号大小（root em）
+
+> 当拿不准使用什么单位时，rem 设字号，px 设边框 em 设边距以及其他的属性
+
+```
+box {
+  font-size: 16px;
+  padding: 1em; // 16px
+}
+// 计算想要的单位例如 20px
+// 计算公式 20/ font-size: 16px = 1.25em
+
+html{
+  font-size：16px;
+}
+// 1rem 相当于16px 不收其他元素字号的影响
+```
+
+> 视口相对单位  vw vh 窗口的可视范围
+当用视口设置字体时，可以平滑的过渡字
+
+> css的 calc() 函数 可进行动态计算长度单位运算
+
+- 任何长度都可以进行运算 width: calc(100% - 10px)
+- 支持 + - * / 运算，运算符前后要留有空格
+
+## 媒体查询
+
+> @media 媒体类型(不写模式all) 媒体条件 { 执行的样式 }
+
+媒体类型
+
+|  类型  | 含义 |
+| :----: | :--: |
+| screen | 屏幕 |
+| print  | 打印 |
+|  all   | 所有媒体（默认值） |
+
+媒体条件
+
+|    条件     |             含义             |
+| :---------: | :--------------------------: |
+|    width    |     可加（min max）前缀      |
+|   height    |     可加（min max）前缀      |
+| orientation | portrait 竖屏/landscape 横屏 |
+
+> 关键词 and组合  only指定样式(可兼容旧版本浏览器，旧版本没有only关键词所以不会执行)  not 排除指定条件，取反操作
+```
+  html {
+    font-size:1em; // 16px
   }
-  // 计算想要的单位例如 20px
-  // 计算公式 20/ font-size: 16px = 1.25em
+ @media screen (max-width:900px){
+  :root {
+    font-size:0.625em // 屏幕小于900px时触发 根元素字号设为 10px
+  }
+ }
+ 
+ @media (min-width:600px),handheld and (orientation:landscap) {
+  :root {
+    font-size:0.875rem;
+  }
+  // 逗号分割的媒体条件都被当做独立的查询，其中一个条件满足就会执行代码
+  // and 关键词 将媒体特性结合在一起形成一个查询条件 
+  // 屏幕大于600px 或者 是智能设备且横屏时 根元素字号设置14px
+ } 
+```
+## 自定义属性( css变量 )
+
+- 定义在代码块中(作用域)
+- 以两个横杠开头 var()调用，第二个参数为默认值
+
+```
+:root {
+  --border: 1px solid red;
+  --main-font: 16px;
+}
+.box {
+  font-size: var(--main-font); // 16px
+  color: var(--color,blue); //--color未声明，取默认值blue
+  border: var(--border); // 1px solid red
+} 
 
 ```

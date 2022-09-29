@@ -7,10 +7,54 @@
   <title>解析</title>
 </head>
 <body>
+  <div class="box">
+    <!-- <span>测试居中</span>fgpyqlj<span>fgpyqlj</span> -->
+    <img class="images" src="./docs/CSS/_images/back-border.png" alt="">
+    <!-- fgpyqlj <span>fgpyqlj</span> -->
+  </div>
+  <div class="parent">
+    测试
+    <!-- <div class="child">
+
+    </div> -->
+  </div>
 </body>
 <script>
     
 </script>
 <style>
+  html,body{
+    padding: 0;
+    margin: 0;
+  }
+  .box{
+    width: 400px;
+    border: 0.5px solid red;
+    /* height: 28px; */
+    display: table-cell;
+    vertical-align: middle;
+    align-items: center;
+
+
+  }
+  .images{
+    width: 28px;
+    height: 28px;
+  }
+  .parent { 
+    width: 60px;
+    height: 60px;
+    background-color: aqua;
+    /* display: table-cell;
+    vertical-align: middle;
+    text-align: center; */
+  }
+  .child{
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    margin-left: auto;
+    margin-right: auto;
+  }
 </style>
 </html>

@@ -60,3 +60,11 @@ box {
   display:flex;
 }
 ```
+
+## 垂直居中
+
+- vertical-align: middle 只影响行内元素或table-cell的对齐，对于行内元素内容忽略
+- 容器高度不固定 用上下相同的内边距撑开盒子，使内容垂直居中
+- disply：table-cell vertical-align:middle 内容垂直居中
+- display: flex, align-items:center 垂直居中
+- 只有文本，使用行高居中

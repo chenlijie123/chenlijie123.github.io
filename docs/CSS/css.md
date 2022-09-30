@@ -20,6 +20,16 @@
 | 7    | E > F  | 子选择符 匹配所有 E 元素的子元素 F         |
 | 8    | E + F  | 相邻选择符 匹配 E 元素之后的同级元素 F     |
 
+猫头鹰选择符 * + * 选中有着相同父级的非第一个子元素的其他元素
+```
+ .parent > * + * {
+  margin-left: 30px; // 类名parent元素，除第一个子元素的其他子元素添加了左边距30px
+ }
+ // 类似于
+ .parent > div + div {
+  margin-left: 30px; // parent 除第一个div的其他div加外边距30px
+ }
+```
 属性选择符
 
 | 序号 | 选择器       | 含义                                                                             |
@@ -274,3 +284,124 @@ html{
 } 
 
 ```
+## 边距折叠、失效
+
+当盒子存在上下外边距时，上下盒子的边距会折叠(无论否同级盒子,子元素也会与外部盒子边距重叠)，以大的边距为准。
+
+- 子元素重叠与外部相邻盒子重叠，外部盒子overflow:hidden/display:flex/重叠部位加padding
+- disolay:table-cell, table-cell不具备外边距，所以不会外边距重叠(不推荐使用，改变盒子类型对布局有影响)
+
+## 层叠
+
+###### 冲突解决规则
+
+- 样式来源
+- 选择器优先级
+- 代码顺序
+
+#### inherit 继承 initial 重置
+
+```
+.fater {
+  color: red;
+}
+.son {
+  color: inherit; // 继承父元素color样式
+}
+
+.son {
+  color: initial; // 重置color ，默认black
+}
+```
+
+## 盒模型
+
+宽度
+
+```
+box-sizing: content-box // 默认值 宽度表示内容
+box-sizing: border-box // 宽度包含内边距和边框
+
+```
+
+高度百分比设置 要给父元素设置一个高度 才会起效
+
+###### 等高列 css 表格 flexbox
+
+并排盒子高度等高，一个改变，其他的盒子高度跟着改变
+
+css 表格 display: table
+
+```
+ box{
+  display:teble;
+  border-spacing：单元格左右间距，单元格上下间距；
+  box1{
+    width:30%;
+    display:table-call;
+  }
+  box2{
+    width:70%;
+    display:table-cell;
+  }
+ }
+```
+flexBox display:flex;
+
+```
+box {
+  display:flex;
+}
+```
+
+## 垂直居中
+
+- vertical-align: middle 只影响行内元素或table-cell的对齐，对于行内元素内容忽略
+- 容器高度不固定 用上下相同的内边距撑开盒子，使内容垂直居中
+- disply：table-cell vertical-align:middle 内容垂直居中
+- display: flex, align-items:center 垂直居中
+- 只有文本，使用行高居中
+
+## 布局 
+
+> 浮动 初衷以实现文字围绕浮动元素、图片 
+
+高度塌陷，浮动后元素脱离正常文档流，造成容器高度塌陷
+- clear:both; 浮动元素后加div标签 设置clear属性，both全部清除，left清除左浮动，right清除右浮动
+- 塌陷容器使用伪元素 ::after
+```
+ box::after{
+  display:block; // 设块元素
+  content：" "; // 让元素站位
+  clear：both; // 清浮动
+ }
+```
+> BFC 块级格式化上下文 独立区域与外部隔离
+
+1. 包含内部所有的外边距，不会与bfc外部区域产生边距折叠
+2. 包含内部所有的浮动元素，添加clear属性只会清除自身所在bfc内的浮动
+3. 不会和bfc外的浮动元素重叠
+
+成为bfc盒子的条件
+- float：left或rigth 不为none即可
+- overflow：hidden、auto、scroll，不为visible即可
+- display 块级容器的属性
+- position：absolute、fixed
+
+## 定位与层叠上下文
+  
+  position：fixed // 固定定位，相对于视口位置  初始包含块为视口
+  position：absolute // 绝对定位，相对于最近的包含块
+  position：relative // 常用于给绝对定位创建一个包含块  
+#### z-index
+
+层叠上下文：给一个定位元素加上z-index，就会变成一个新的层叠上下文的根(z-index:auto不会)，所有后代元素就是这个层叠上下文的一部分
+`z-index：0` 与`z-index：auto` 同级，后书写在上面，auto不会生成新的层叠上下文
+
+#### 浏览器渲染过程
+1、生成DOM树：解析html 根据文档定义创建DOM树
+2、生成CSSOM树：解析CSS，生成CSSOM树
+3、构建渲染树：将DOM树、CSSOM树构建成渲染树
+4、布局阶段：浏览器计算布局（元素位置、大小），计算层级、图层绘制、合并，GPU绘制
+5、绘制阶段：遍历渲染树，遇到script标签停止渲染，优先加载JS代码（JS线程和DOM渲染线程公用同一个线程，JS可能改变DOM结构，导致重绘）
+6、DOM渲染完成

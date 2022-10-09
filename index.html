@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>解析</title>
-</head>
-<body>
-   
-  <div class="box">
-      <img class="images" src="./docs/CSS/_images/flex.png" alt="" >
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>解析</title>
+  </head>
+  <body>
+    <div class="box">
+      <img class="images" src="./docs/CSS/_images/flex.png" alt="" />
       <div class="bfc_box">
         <h2>环绕标题</h2>
         <p>
@@ -20,63 +19,81 @@
           环绕内容环绕内容环绕内容环绕内容环绕内容环绕内容环绕内容环绕内容环绕内容环绕内容环绕内容环绕内容环绕内容环绕内容环绕内容环绕内容环绕内容环绕内容环绕内容环绕内容环绕内容
         </p>
       </div>
-  </div>
-<div class="z_index">
+    </div>
+    <div class="z_index">
+      <div class="pos_box">
+        <div class="pos_child"></div>
+      </div>
+      <div class="pos"></div>
+    </div>
+  </body>
+  <script></script>
+  <style>
+    html,
+    body {
+      padding: 0;
+      margin: 0;
+    }
 
-<div class="pos"></div>
-<div class="pos_box"></div>
-</div>
+    .box {
+      width: 600px;
+      border: 10px solid red;
+      box-shadow: -13px 13px 5px  #CCC;
+      padding: 50px;
+      margin: 40px;
+      background: url("docs/CSS/_images/back-border.png") no-repeat;
+      background-origin: content-box;
+      background-clip: padding-box;
+    }
 
+    .bfc_box {
+      /* display: flex;
+      flex-direction: column; */
+      
+    }
 
-</body>
-<script>
-    
-</script>
-<style>
-  html,body{
-    padding: 0;
-    margin: 0;
-  }
- 
-  .box{
-    width: 600px;
-    border: 0.5px solid red;
-  }
-  .bfc_box {
-    overflow: hidden;
-  }
- 
-  .images{
-    width: 280px;
-    height: 280px;
-    float: left;
-    margin-left: 40px;
-  }
-.z_index{
-  width: 400px;
-  height: 400px;
-  border: 2px solid;
-  position: relative;
-  z-index: 0;
-}
-.pos{
-  width: 50px;
-  height: 50px;
-  background-color: yellowgreen;
-  position: absolute;
-  top: calc(50% - 25px);
-  right: calc(50% - 25px);
-  z-index:auto;
-}
+    .images {
+      width: 280px;
+      height: 280px;
+      margin-left: 40px;
+      float: left;
+      /* flex: 1; */
+    }
+    .z_index {
+      width: 400px;
+      height: 400px;
+      border: 2px solid;
+      position: relative;
+      /* z-index: 0; */
+    }
+     
 
-.pos_box{
-  width: 80px;
-  height: 80px;
-  background-color: blue;
-  position: absolute;
-  top: calc(50% - 40px);
-  right: calc(50% - 40px);
-  z-index: 0;
-}
-</style>
+    .pos_box {
+      width: 280px;
+      height: 280px;
+      background-color: blue;
+      position: absolute;
+      top: calc(50% - 140px);
+      right: calc(50% - 140px);
+      z-index: 10;
+    }
+    .pos_box .pos_child{
+      width: 200px;
+      height: 200px;
+      background-color: red;
+      /* position: absolute;
+      top: calc(50% - 100px);
+      right: calc(50% - 100px); */
+      z-index: 10;
+    }
+    .pos {
+      width: 150px;
+      height: 150px;
+      background-color: yellowgreen;
+      position: absolute;
+      top: calc(50% - 75px);
+      right: calc(50% - 75px);
+      z-index: 0;
+    }
+  </style>
 </html>

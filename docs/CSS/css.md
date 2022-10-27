@@ -395,8 +395,8 @@ box {
   position：relative // 常用于给绝对定位创建一个包含块  
 #### z-index
 
-1、z-index只在定位元素上生效，不能控制静态元素
-2、定位元素加z-index可以创建层叠上下文
+1. z-index只在定位元素上生效，不能控制静态元素
+2. 定位元素加z-index可以创建层叠上下文
 
 层叠上下文：给一个定位元素加上z-index，就会变成一个新的层叠上下文的根(z-index:auto不会)，所有后代元素就是这个层叠上下文的一部分
 `z-index：0` 与`z-index：auto` 同级，html后书写的在上面，auto不会生成新的层叠上下文
@@ -408,13 +408,13 @@ box {
 - z-index为auto的定位元素（及子元素）
 - z-index为正数的定位元素（及子元素）
 
-#### 浏览器渲染过程
-1、生成DOM树：解析html 根据文档定义创建DOM树
-2、生成CSSOM树：解析CSS，生成CSSOM树
-3、构建渲染树：将DOM树、CSSOM树构建成渲染树
-4、布局阶段：浏览器计算布局（元素位置、大小），计算层级、图层绘制、合并，GPU绘制
-5、绘制阶段：遍历渲染树，遇到script标签停止渲染，优先加载JS代码（JS线程和DOM渲染线程公用同一个线程，JS可能改变DOM结构，导致重绘）
-6、DOM渲染完成
+## 浏览器渲染过程
+1. 生成DOM树：解析html 根据文档定义创建DOM树
+2. 生成CSSOM树：解析CSS，生成CSSOM树
+3. 构建渲染树：将DOM树、CSSOM树构建成渲染树
+4. 布局阶段：浏览器计算布局（元素位置、大小），计算层级、图层绘制、合并，GPU绘制
+5. 绘制阶段：遍历渲染树，遇到script标签停止渲染，优先加载JS代码（JS线程和DOM渲染线程公用同一个线程，JS可能改变DOM结构，导致重绘）
+6. DOM渲染完成
 
 #### 粘性定位 position：sticky
 
@@ -424,4 +424,91 @@ box {
   top:10;
 
 ```
-距离
+
+## CSS 模块化 
+
+1. 基础样式，通用样式
+2. 模块化命名，分割页面，把CSS拆解成可复用的模块 例如：message
+3. 通过定义一个以模块名称开头的新类名创建修饰符。例如：message-error 
+
+```
+ .message { // 通用样式
+  padding: 0 2em;
+  border-radius: 0.5em;
+ }
+
+ .message-error { // 修饰样式
+  color: red;
+ }
+ ```
+
+## 渐变 阴影 过渡 变换
+
+- background-image 指定一个文件或生成颜色渐变做背景
+- background-position 背景图初始位置
+- background-size 元素内背景图渲染尺寸 // 单张图片 width/ width,height/ cover ,contain 
+- background-repeat 是否平铺
+- background-origin 背景相对元素内边距(默认)、边框 、内容的定位
+- background-clip 指定背景是否填充边框盒（默认） 内边距盒子 内容盒子
+- background-attachment 背景图随元素上下滚动(默认) 还是固定
+- background-color 指定纯色背景
+- background-image 可接受url 或者渐变函数linear-gradient() 
+
+cover ： 缩放比例，短边填满元素，长边裁剪
+contain ：缩放比例，长边填满元素，短边显示空表区
+###### 渐变
+
+> linear-gradient 线性渐变 （角度，color，color ...）
+```
+  background-image: url() / linear-gradient(to left top, blue ,red) 
+  // 右下到左上 蓝渐变红 ，不写角度默认从上到下(180deg/ to bottom)
+   
+```
+> radial-gradient 径向渐变 (shape size at position, start-color, ..., last-color);
+```
+  shaop: ellipse 默认椭圆径向渐变 、 circle 圆形渐变
+  size：默认圆心到圆心最远的角
+  position ：渐变的位置 center默认、 top设顶部为圆心渐变的纵坐标、 bottom底部为圆心纵坐标
+  background-image: radial-gradient(circle , red , blue , yellow)
+
+```
+###### 阴影
+
+> box-show / text-show
+
+``` 
+ box-show : 水平偏移、垂直偏移、模糊半径(选填)、扩展半径(选填)、阴影颜色
+
+ // 模糊半径控制阴影边缘模糊区域的大小、扩展半径用来控制阴影大小
+
+ ```
+
+ ###### 过渡 (不可用在display)
+
+ > transition: 过渡的属性 持续时间 定时函数 延迟函数
+
+ - 第一个值 transition-property ；指定过渡属性 默认all，多个值逗号隔开 color，font-size
+ - 第二个值 过渡持续时间 必须添加单位 0s 0ms
+ - 第三个值 定时函数 过渡过程如何加速或减速 关键字linear、ease-in 或者自定义函数
+ - 第四个值 延迟时间
+
+ 1. 定时函数
+   让属性从一个值移动到另一个值，定义如何移动，关键字linear 匀速，ease-in开始慢后面快-加速，ease-out开始快后面慢-减速
+
+###### 变换
+> transform 改变元素的形状和位置 二维或三维的旋转、缩放、倾斜、位移 (只适用displan：block元素)
+
+1. 旋转 rotate围绕轴心、基点转动角度， transform: rotate(20deg/ 0.5turn)
+2. 平移 translate 类似于定位 transform：translateX(30px)/ translateY(30px) / translate(30px,30px)
+3. 缩放 scale 缩小、放大元素 transform:scale(0.5) 与1对比大小
+4. 倾斜 skew 元素变形 transform： skew(30deg)
+
+###### 改变基点、轴心 默认值(50%，50%)/(center,center)
+
+- transform-origin: x/y/z  
+
+| 方向 | 左 |  中   |  右  |
+|:----|-----|----|----|
+|水平方向| left | center| rigth| 
+|对应百分比| 0 | 50% | 100%|
+|垂直方向 | top| center| bottom|

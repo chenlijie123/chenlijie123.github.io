@@ -3,4 +3,4 @@
   - [js  基础](JS/js.md)
   - [git 指令](GIT/git.md)
   - [es6 入门](ES6/es6.md)
-  - [随笔](JOT/jottings.md)
+  - [JS高级程序设计随笔](JS程序设计阅读随笔/JS.md)

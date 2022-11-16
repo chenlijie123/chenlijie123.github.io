@@ -188,3 +188,67 @@ var person = new Object()
 #### Object
 
 创建： 构造函数 var person = new Object() 字面量 var person = {}
+
+> 转换方法 toLocaleString()、toString()、valueOf()
+
+所有对象都具有toLocaleString()、toString()、valueOf() 方法，valueOf返回的还是数组本身，toString会返回由数组中每个值以逗号分割组成的字符串，显示调用数组的toString()，其实就是调用数组每一项的toString()方法，toLocaleString()经常返回与toString()和 valueOf()方法相同的结果，但是实际调用的是数组每一项的toLocalString()方法
+
+##  本地存储
+#### localStorage sessionStorage
+
+localStorage 长久有效的本地存储，只能存储字符串格式数据，大小5MB，扩展了cookie的4k
+sessionStorage 会话结束时清空数据
+
+> localStorage sessionStorage API 
+
+- setItem('key','value') 设置 JSON格式数据  value = JSON.stringify(value)
+- getItem('key') 获取 JSON格式的字符串 JSON.parse(localStorage.getItem('key'))
+- removeItem('key') 删除
+- clear() 全部清空
+- key(n) 获取第n个key名
+- length 获取键值对数量有多少
+```
+  const info = ['13xx', 188, null, undefined, false, [123, 22, '44']]
+  localStorage.setItem(infoName,JSON.stringify(info))
+  const strVal = localStorage.getItem('infoName')
+  const str = JSON.parse(strVal)
+  console.log(typeof str, str) //  object (6) ['13xx', 188, null, null, false, Array(3)]
+```
+
+#### lockr 轻量级库 与localStorage的交互
+
+```
+  npm i lockr --s
+```
+或者
+```
+  <script src="https://raw.githubusercontent.com/tsironis/lockr/master/lockr.js" type="text/javascript"></script>
+```
+```
+  import Lockr from 'lockr'
+
+  const info = ['13xx', 188, null, undefined, false, [123, 22, '44']]
+  Lockr.set('infoName',info)
+  arr = Lockr.get('infoName')
+  console.log(typeof arr, arr) //  object (6) ['13xx', 188, null, null, false, Array(3)]
+
+  Arr = JSON.parse(localStorage.getItem('infoName))
+  console.log( typeof Arr,Arr)
+  object {data: (6) ['13xx', 188, null, null, false, Array(3)]}
+```
+- set('key',value) 设置value => 类型可以是 String/Number/Array/Object
+- get('key') 获取key对应的value
+- prefix 给添加的key键添加前缀锁
+```
+ lockr.prefix('lockr')
+ lockr.set('info',123321)
+ lockr.get('info') // 123321
+
+ localStorage.getItem('info') //null
+ localStorage.getItem('lockrinfo') // '{"data":123321}'
+```
+- rm('key') 删除
+- sadd('key',val) 在key对应的value原有的基础上，往末尾添加val
+- sismember('key',val) 判断key对应的value，val是否在value中存在 true/false 不支持数组、对象的查找
+- srem('key', val) key对应的value值，移除value内的val值 ，不支持数组、对象
+- getAll() 获取全部的localStorage 数据

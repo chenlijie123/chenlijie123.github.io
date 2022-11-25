@@ -30,15 +30,55 @@ noscript 指定在不支持脚本的浏览器下替换展示的内容，可以�
 ```
 无论是声明还是未声明 typeof 都返回undefined，严格来讲两个变量存在根本性差异，但他们都无法执行实际操作 
 
+#### 检测数据类型
+
+> typeof (检测基本类型值)
+```
+function fn() {}
+typeof(123) // Number
+typeof('123') // String
+typeof(true) // Boolean
+typeof(null) // Object
+typeof fn // function
+```
+> instanceof (用来检测具体的对象类型)
+```
+let arr = [1,2,3]
+let obj = {}
+function fn (){}
+arr instanceof Array // true  arr.__proto__ == Array.prototype
+arr instanceof Object // true  arr.__proto__.__proto__ == Object.prototype
+obj instanceof Object // true
+fn instanceof Object // true
+
+// instanceof 检测原理 原型链对比 arr.__proto__ == Array.prototype
+```
+
+再续
+
 #### 数值转换 
 NaN 是否为数值 检测isNaN() 检测传入的值是否能转换数值， 不能转化数字返回true
 转换规则：基于对象调用isNaN()函数，先调用valueOf()方法，返回值是否可转换为数值，如果不能，再调用toString(),在测试返回值
 
+isNaN(String) // 传入字符，先把字符转换数字在判断是不是NaN
+```
+ isNaN('hello') // == isNaN( Number('hellow')) == isNaN(NaN) == true
+ isNaN('123') // == isNaN( Number('123')) == isNaN( 123 ) == false
+
+ isNaN({}) // true
+ // 等同于
+ isNaN(Number({})) // true
+ 
+ isNaN(['xzy']) // true
+ // 等同于
+ isNaN(Number(['xzy'])) // true
+
+``` 
 Number() 'undefined' // NaN  null // 0   
 字符数字返回十进制，前导零会忽略，含有十六进制0xf，转十进制，空为零  
-parseInt()取整 查找非空字符，如若第一个字符不是数字或负号，返回NaN, 第二参数可为进制数  
-parseFloat() 只解析十进制，解析字符返回浮点数  
-
+parseInt()取整 查找非空字符，如若第一个字符不是数字或负号，返回NaN, 第二参数可为进制数(2到36之间)  
+// parseInt 转换规则 先转换字符串，在查找是否是数字不是数字就停止， 所以结果要么是十进制数字要么NaN  
+parseFloat() 只解析十进制，解析字符返回浮点数 空字符返回NaN  
 String  
 字符字面量(转义序列) \n 换行 \r 回车 \' \"  
 任何字符都可访问length属性，字符串是不可变的，一旦创建值不可变，改变某个变量保存的字符，首先要销毁原来的，然后再用另一个包含新值的字符串填充该变量  
@@ -116,7 +156,24 @@ valueOf() 返回对象的字符串、数值或布尔值表示，通常与toStrin
  - for-in 精准迭代的语句 可枚举对象的属性 因对象的属性没有顺序，因此for-in
 循环输出属性名顺序不可预测
 
-- break 立即退出循环 continue退出当前循环，从循环顶部继续执行 
+- break 立即退出循环 continue退出当前循环，从循环顶部继续执行 return 退出函数打断循环
+```
+for(let i=0; i<10;i++) {
+  if(i == 3) break // 跳出当前所在整个循环，如果是循环嵌套break处在内部循环就只能跳出内部循环  
+  if(i == 3) continue // 跳出本次循环，返回循环结构的头部，开始下次循环
+  if(i == 3) return // Uncaught SyntaxError: Illegal return statement 
+  // return 跳出函数，for循环要处在函数内部，才会打断循环
+}
+
+命名外层循环
+
+one：
+   for (let i = 0; i < 10; i++) {
+        for (let j = 0; j < 10; j++) {
+           if(j == 3) break one //跳出 名为one的循环体
+        }
+      }
+```
 
 - with 将代码作用域设置到一个特定的对象中
 ```
@@ -150,6 +207,62 @@ with(loaction){
 - 封装多条语句，任意地方调用
 关键字function 函数名 一组参数(arg0,arg1...) 函数体{} function fn(arg0,arg1) { } 
 
+- Function 关键字
+function fn(){}
+
+- 函数表达式
+var fn = function () {}
+
+- 构造函数
+
+var fn = new Function()
+
+同一个函数多次被声明，后面的会覆盖前面的声明  
+```
+ function fn() {
+  console.log(1)
+ }
+
+ fn() // 2
+
+function fn() {
+  console.log(2)
+ }
+
+ fn() // 2
+
+ // 后一次的函数声明覆盖了前面一次。而且，由于函数名的提升,前一次声明是无效的
+```
+
+- 函数名的提升
+
+```
+f();
+
+function f() {} // 不会报错
+```
+```
+fn()
+var fn = function() {} // 报错
+
+等同于
+var fn // 声明未赋值 undefined
+fn() // 报错
+fn = funtion() {}
+
+```
+> 如果同时采用function命令和赋值语句同时声明一个函数，最后采用的是赋值语句的定义
+```
+var f = function () {
+  console.log('1');
+}
+
+function f() {
+  console.log('2');
+}
+
+f() // 1
+```
 #### 垃圾回收
 
 执行环境负责管理代码执行过程使用的内存，自动分配、释放内存。  

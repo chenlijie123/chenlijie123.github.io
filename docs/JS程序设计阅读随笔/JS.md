@@ -263,6 +263,46 @@ function f() {
 
 f() // 1
 ```
+
+> 变量提升与函数提升以及优先级
+
+变量提升
+```
+console.log(str)
+var str= '123'
+console.log(str)
+
+解析
+
+var str // 声明str
+console.log(str) // undefined
+str = '123' // str赋值
+console.log(str) // '123'
+```
+
+函数提升 ：只有函数式声明才会存在函数提升
+```
+ function foo(){} 解析 var foo = function() {}
+
+
+ console.log(bar)
+ console.log(bar())
+ var bar = 456 
+ function bar (){
+  consele.log(123)
+ }
+ console.log(bar)
+ bar = 123
+ console.log(bar)
+ console.log(bar())
+
+ 解析
+
+ var bar = function(){ console.log() }
+
+```
+
+
 #### 垃圾回收
 
 执行环境负责管理代码执行过程使用的内存，自动分配、释放内存。  

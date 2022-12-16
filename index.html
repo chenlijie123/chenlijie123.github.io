@@ -6,25 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>解析</title>
   </head>
-  <body></body>
+  <body>
+    <div class="box1" style="width: 100px; height: 100px; cursor: pointer; background-color: aqua">debounce</div>
+  </body>
   <script>
-    // debugger
- console.log(bar)
- console.log(bar());
- var bar = 456
- function bar() {
-  // console.log(123);
- }
- console.log(bar)
- bar = 789
- console.log(bar);
- console.log(bar());
+     function debounce(fn,delay=500){
+      var timer = null
+      return function() {
+        var args = arguments
+        var context = this
+        clearTimeout(timer)
+        timer = setTimeout(function(){
+            fn.apply(context,args)
+        },delay)
+      }
+     }
+     let divbox =  document.getElementsByClassName('box1')[0]
+    //  console.log(divbox);
+     divbox.addEventListener('onclick',debounce(function(){
+      console.log('22222222222222222');
+     },1000))
+
+    
+   
   </script>
-  <style>
-    html,
-    body {
-      padding: 0;
-      margin: 0;
-    }
-  </style>
+  <style></style>
 </html>

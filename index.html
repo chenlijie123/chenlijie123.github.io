@@ -10,25 +10,13 @@
     <div class="box1" style="width: 100px; height: 100px; cursor: pointer; background-color: aqua">debounce</div>
   </body>
   <script>
-     function debounce(fn,delay=500){
-      var timer = null
-      return function() {
-        var args = arguments
-        var context = this
-        clearTimeout(timer)
-        timer = setTimeout(function(){
-            fn.apply(context,args)
-        },delay)
-      }
-     }
-     let divbox =  document.getElementsByClassName('box1')[0]
-    //  console.log(divbox);
-     divbox.addEventListener('onclick',debounce(function(){
-      console.log('22222222222222222');
-     },1000))
-
     
-   
+     let box =  document.querySelector('.box1')
+     console.log(box);
+     box.style['background-color'] = 'red'
+     let sty= box.getAttribute('style')
+     console.log(sty);
+
   </script>
   <style></style>
 </html>

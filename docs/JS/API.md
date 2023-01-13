@@ -175,3 +175,22 @@ Date的实例对象除了valueOf 和 toString 还可以分为三类
 - `to`类：从Date对象返回一个字符串，表示时间
 - `get`类：获取Date对象的日期和时间
 - `set`类：设置Date对象的日期和时间
+
+#### 节流函数
+
+```
+  throttle(fn,time=1000) {
+    let flag = true // 设置开关
+    return function() { // 返回函数
+      if(!false) return false // 开关关闭 阻止执行
+      flag = false // 关闭开关
+
+     // fn.apply(this,arguments) 立即执行
+
+      setTimeout(()=>{
+        flag = true // 打开开关
+      //  fn.apply(this,arguments)  延期执行
+      },time)
+    }
+  }
+```

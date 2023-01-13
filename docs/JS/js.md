@@ -197,8 +197,117 @@ findIndex 、find((匹配项，索引，数组本身)=>{ 匹配逻辑} ) // 查�
 
 ```
 
-## 正则
+## 事件
 
-- 字面量字符  /a/ 代表匹配字母a
+#### 事件模型
 
-- 元字符
+```
+<div id="box">
+  <button class="btn" onclick="btnClick()">事件函数方法一</button>
+  <button class="button" id="targetID">事件函数方法二</button>
+  <button class="btn" id="btnssss">事件函数方法三</button>
+</div>
+```
+
+- 方案一 on + click
+```
+function btnClick(event){
+  // 监听click事件
+}
+```
+
+- 方案二 onclick 
+```
+let btn = document.querySelector('.button')
+btn.onclick = function(event){
+  // 监听click事件
+}
+```
+- 方案三
+```
+let btn = document.querySelectorAll('.btn')[1]
+
+btn.addEventListener(
+  'click',
+  function(event){
+    // 监听click函数
+  },
+  {
+    captrue:false, //冒泡时触发监听函数
+    once: true // 只触发一次
+  })
+```
+#### 事件传播
+
+div -> botton 从上层到底层，捕获阶段  
+botton 在目标节点上触发，目标阶段  
+botton -> div 从底层回传到上层，冒泡阶段
+
+```
+target.addEventListener('事件类型'，监听函数，函数配置)
+
+// capture:false 事件传播的冒泡阶段触发监听函数
+// captrue:true 事件传播的捕获阶段触发监听函数
+
+
+```
+#### 事件代理 
+
+> 事件传播中，冒泡阶段事件会上传到父节点，所以监听函数定义在父节点
+
+```
+ let box = document.querySelector('#box')
+
+ box.addEventListener(
+  'click',
+  function(event) {
+    // 监听函数
+
+  },
+  false
+ )
+ 
+  // event.stopPorpagation() // 阻止当前监听函数不再传播，不影响当前节点上其他监听函数
+
+  // event.stopImmediatePropagation() // 彻底取消事件，不再触发后续的监听函数
+```
+#### 事件类型
+
+- 鼠标事件 click mousedown mouseup dblclick 
+
+监听事件触发顺序 mousedown mouseup click dblclick(双击最后触发)  
+
+
+#### 移动事件
+
+- mousemove 鼠标在节点内部移动触发，持续触发应该限制触发频率
+- mouseenter 进入节点时触发，父节点内部进入子节点不会
+- mouseover 进入节点触发，父节点内部进入子节点会再次触发
+- mouseout 离开节点触发，父节点内部离开子节点会触发
+- mouseleave 离开节点触发，父节点内部离开子节点不会触发
+
+- contextmenu 鼠标右键触发
+- wheel 鼠标滚轮触发
+
+#### event位置属性
+
+- offsetX offsetY 相对于点击元素左上角位置
+- clientX clientY 相对于浏览器左上角位置
+- screenX screenY 相对于显示屏左上角位置
+- pageX pageY 相对于文档左上角位置
+
+#### 文本 链接 图片 节点拖拽
+> 节点拖拽必须设置 `draggable="true"`
+
+- dragstart 拖拽开始
+- dragend 拖拽结束
+- drag 拖拽持续触发 默认间隔几百毫秒
+- dragenter 拖拽进入节点触发
+- dragover 拖拽到当前节点上时，当前节点持续触发
+- dragleave 拖拽离开当前节点，当前节点触发
+
+#### 窗口事件 
+
+- scroll 滚动事件
+
+- resize 窗口缩放事件

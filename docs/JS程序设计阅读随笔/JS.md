@@ -5,11 +5,122 @@ script 通过 src 找到对应 js 文件加载、执行，同时 html 不会向�
 - src 加载外部文件
   // defer async 只有 src 加载外部文件时有效
 - defer 属性 脚本会延迟到整个页面都解析完成后再执行（解析 html、下载脚本，当 html 解析完成才执行脚本）
+
+浏览器下载脚本文件时不阻塞页面渲染，而且可以保证执行循序  
+
 - async 属性 脚本加载同时 html 解析，脚本加载完成直接执行，html 停止解析
+
+浏览器下载脚本的同时，浏览器继续页面的渲染，无法保证脚本执行顺序，哪个先下完就加载哪个
+
+
 
 js 的引入方式 ： 1.在 html 中 书写在<script></script>内部 2.通过 script 的 src 引入，书写在 body 底部防止阻塞 html 解析。
 
 noscript 指定在不支持脚本的浏览器下替换展示的内容，可以代替 body 内的任何标签，不包含 script 标签。
+
+
+#### 动态加载
+```
+['a.js','b.js'].forEach(function(src){
+  let script = document.createElement('script')
+  script.src = src
+  script.async = false
+  document.head.appendChild(script)
+})
+```
+动态生成script标签不会阻塞页面渲染，也不会造成浏览器假死，为了避免执行顺序不确定性问题，async设置为false
+
+
+## 浏览器
+
+
+> 核心为渲染引擎与javascript解释器(JS引擎)
+
+不同浏览器的渲染引擎 Firefox（Gecko） Safari(WebKit) Chrome (Blink) IE (Tirdent) Edge (EdgeHTML)  
+
+#### 渲染引擎处理页面的四个阶段
+- 解析代码 HTML解析为DOM，CSS代码解析为CSSOM （CSS Object Model）
+- 对象合并 将DOM与CSSOM 合并为一棵渲染树
+- 布局 计算出渲染树的布局
+- 绘制 将渲染树绘制到屏幕
+
+#### javaScript 引擎
+javaScript引擎主要作用读取js代码，对其处理后运行  
+js一种解释形语言不需要编译，由解释器时时运行
+
+#### 重流和重绘
+
+渲染树 转换 网页布局 称为布局流，布局显示到页面的过程 称为绘制。  
+页面生成后，脚本操作和样式操作都会触发 重流和重绘  
+重流必然重绘，重绘不一定重流比如改变元素颜色只会导致重绘，改变元素布局导致重绘和重流
+
+```
+  var foo = document.getElementById('div')
+  foo.style.color = 'red'
+  foo.style.marginTop = '30px'
+
+  上面代码只会发生一次重绘，因为浏览器会累积DOM变动，然后一次性执行
+```
+
+#### XMLHttpRequest 对象
+AJAX 通过 XMLHttpRequest对象发出HTTP请求  
+
+``` 实例
+function states() {
+  if(xhr.readystate === 4) {
+    if(xhr.status === 200){
+      console.log(xhr.reponesText)
+    }else{
+      console.error(xhr.statusText)
+    }
+  }
+}
+
+
+  var xhr = new XMLHttpRquest() // 生成实例
+
+  xhr.onreadystatechange = function(){  // 监听通讯状态
+    if(xhr.readyState === 4){
+      if(xhr.status === 200){
+        console.log(xhr.responseText);
+      } else {
+        console.error(xhr.statusText)
+      }
+    }
+  }
+
+  readyState 实例对象xhr的状态 
+  0 实例生成，但open（）还没调用
+  1 open（）已调用，send（）未调用
+  2 send()已调用，服务器返回的头部信息和状态码已收到
+  3 表示正在接收服务器传来的数据体
+  4 服务器返回的数据已经完成接收，或者接收失败 
+
+  onreadystatechange () 指向监听函数 readystatechange事件发生时触发
+
+  xhr.open(methods，url，async，user，passsword) // 初始化请求 建立http连接
+  // methods: GET/POST
+  // url: 地址 string
+  // async: true/false 请求方式
+  // user: 认证user
+  // password:认证密码 
+
+  xhr.open('GET','http://www.xx.com?id=123&name=456',true)
+
+  var data = {
+    id: 123,
+    name:456
+  }
+  xhr.open('POST','url',true)
+
+  xhr.responseType ='text' 默认; // open()之后 send()之前 设置responseType 告诉浏览器如何解读返回的数据
+  // arraybuffer 二进制数组
+  // blob 二进制对象
+  // json JSn对象
+  // '' / text 默认字符串
+
+  xhr.send(JSON.Stringify(data)/ string) // 发送请求
+```
 
 #### 变量
 

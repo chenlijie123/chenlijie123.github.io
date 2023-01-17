@@ -1,3 +1,23 @@
+## CSS 命名规范 BEM
+
+- BEM （block-块 element-元素 modifier-修饰符）
+
+- 在选择器中 通过三种符号表示扩展的关系
+
+-中划线 仅作为连字符使用，仅表示多单词连接器  
+
+__双下划线用来连接块与块的子元素  
+
+_单下划线用来描述一个快或者快的子元素的一种状态  
+
+- block 常规与BEM相同  .list
+
+- element 常规 .list .item{}  BEM .list__item{}
+
+- modifier 块的特定状态 常规 .list .item.active{} BEM .list__item_active{}
+
+
+
 ## 选择器
 
 
@@ -514,3 +534,5 @@ contain ：缩放比例，长边填满元素，短边显示空表区
 |水平方向| left | center| rigth| 
 |对应百分比| 0 | 50% | 100%|
 |垂直方向 | top| center| bottom|
+
+

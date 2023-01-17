@@ -266,7 +266,7 @@ target.addEventListener('事件类型'，监听函数，函数配置)
   },
   false
  )
- 
+
   // event.stopPorpagation() // 阻止当前监听函数不再传播，不影响当前节点上其他监听函数
 
   // event.stopImmediatePropagation() // 彻底取消事件，不再触发后续的监听函数

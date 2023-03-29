@@ -36,14 +36,6 @@
 
 ```
 
-#### 远程分支更新到本地
-
-
-```
-  git remote update origin --prune
-
-```
-
 #### 合并
 ```
 git checkout 目标分支名 // 切换到目标分支
@@ -73,6 +65,12 @@ git reset --head hash
 
 ```
 
+#### 远程分支更新到本地
+
+```
+  git remote update origin --prune
+
+```
 
 #### 远程分支与本地
 
@@ -118,4 +116,41 @@ git reset --head hash
 
       git remote show origin 查看远程分支与本地分支对应关系  
       git remote prune origin 删除远程已经删除过的分支  
-      
+
+- git fetch 同步远程本地分支
+      git branch -a 查看远程与本地分支区别
+      git remote prune origin --dry-run 列出所有本地可以删除的分支
+      git remote prune origin 删除
+
+####  tag
+
+- 查看、筛选 tag标签 
+
+      git tag 所有标签
+      git tag -l xxx 筛选标签名为xxx的标签
+      git show 标签名 查看标签信息
+      git log --oneline --graph 在提交历史中查看标签
+
+- 创建 tag
+      git tag 标签名 给当前的提交版本创建一个(轻量标签)
+      git tag 标签名 提交版本号(commitID) 给指定版本创建一个(轻量标签)
+
+      git tag -a 标签名称 -m 附注信息 给当前提交版本创建(附注标签)
+      // 例如 git tag -a v4.0 -m "里程碑版本 4.0 发布"
+      git tag -a 标签名 commitID -m "附注信息" 给指定的commit提交版本创建(附注标签)
+
+- 删除 tag
+
+      git tag -d 标签名 删除指定标签 （本地）
+
+      git push origin :regs/tags/标签名称(远程仓库)
+      or
+      git push origin --delete 标签名称(远程仓库)
+
+- 推送远程仓库
+      git push origin 标签名 单个推送
+      or
+      git push origin --tags 全部推送
+
+- 以tag标签版本为基础 创建新的分支
+      git checkout -b 分支名称 标签名称

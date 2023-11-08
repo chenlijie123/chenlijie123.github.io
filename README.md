@@ -1,2 +1,7 @@
 # chenlijie123.github.io
-  ## 第一次修改
+
+## 本地运行
+
+cd docs
+
+docsify serve

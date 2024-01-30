@@ -26,7 +26,7 @@ _单下划线用来描述一个快或者快的子元素的一种状态
 
 基本选择器
 
-| 序号 | 选择器 | 含义                |
+| 序号 | 选择器 | 含义11                |
 | ---- | :----- | ------------------- |
 | 1    | \*     | 通用选择器 匹配全部 |
 | 2    | E      | 标签/元素选择符     |
@@ -54,7 +54,7 @@ _单下划线用来描述一个快或者快的子元素的一种状态
 ```
 属性选择符
 
-| 序号 | 选择器       | 含义                                                                             |
+| 序号 |   选择器      |                               含义                                              |
 | ---- | ------------ | -------------------------------------------------------------------------------- |
 | 9    | E[att]       | 匹配所有具有 att 属性的 E 元素 （E 可以省略 例如[att]）                          |
 | 10   | E[att=val]   | 匹配所有 att 属性等于 val 的 E 元素                                              |
@@ -340,7 +340,7 @@ html{
 
 宽度
 
-```
+```css
 box-sizing: content-box // 默认值 宽度表示内容
 box-sizing: border-box // 宽度包含内边距和边框
 
@@ -354,7 +354,7 @@ box-sizing: border-box // 宽度包含内边距和边框
 
 css 表格 display: table
 
-```
+```css
  box{
   display:teble;
   border-spacing：单元格左右间距，单元格上下间距；
@@ -391,7 +391,7 @@ box {
 高度塌陷，浮动后元素脱离正常文档流，造成容器高度塌陷
 - clear:both; 浮动元素后加div标签 设置clear属性，both全部清除，left清除左浮动，right清除右浮动
 - 塌陷容器使用伪元素 ::after
-```
+```css
  box::after{
   display:block; // 设块元素
   content：" "; // 让元素站位
@@ -441,7 +441,7 @@ box {
 #### 粘性定位 position：sticky
 
 粘性定位：相对定位和固定定位混合，跨越阈值前相对定位，阈值后固定定位
-```
+```css
   position:sticky;
   top:10;
 
@@ -453,7 +453,7 @@ box {
 2. 模块化命名，分割页面，把CSS拆解成可复用的模块 例如：message
 3. 通过定义一个以模块名称开头的新类名创建修饰符。例如：message-error 
 
-```
+```css
  .message { // 通用样式
   padding: 0 2em;
   border-radius: 0.5em;
@@ -481,13 +481,13 @@ contain ：缩放比例，长边填满元素，短边显示空表区
 ###### 渐变
 
 > linear-gradient 线性渐变 （角度，color，color ...）
-```
+```css
   background-image: url() / linear-gradient(to left top, blue ,red) 
   // 右下到左上 蓝渐变红 ，不写角度默认从上到下(180deg/ to bottom)
    
 ```
 > radial-gradient 径向渐变 (shape size at position, start-color, ..., last-color);
-```
+```css
   shaop: ellipse 默认椭圆径向渐变 、 circle 圆形渐变
   size：默认圆心到圆心最远的角
   position ：渐变的位置 center默认、 top设顶部为圆心渐变的纵坐标、 bottom底部为圆心纵坐标
